@@ -14,7 +14,8 @@ app.use(bodyParser.urlencoded({extended: false}));
 /* ---------------------------------------------------------------- */
 
 app.get('/', (req, res) => {
-	res.send('Welcome to AirBnDatabase ;) -- Go to /listings to see all listings (limit 10) in the server response of the terminal!')
+	//res.send('Welcome to AirBnDatabase ;) -- Go to /listings to see all listings (limit 10) in the server response of the terminal!');
+	res.write('<body><p>Welcome to AirBnDatabase ;) -- Go to /listings to see all listings (limit 10) in the server response of the terminal!<\p><a href="http://localhost:3000/listings"><button>LISTINGS</button></a></body>');
 });
 
 app.get('/listings', routes.getAllListings);
