@@ -89,13 +89,15 @@ export default class Dashboard extends React.Component {
   render() {    
     return (
       <div className="Dashboard">
+        <div style={{backgroundColor: 'white', minHeight:1000}}>
 
         <PageNavbar active="dashboard" />
 
         <br></br>
         <div className="container movies-container">
           <div className="jumbotron">
-            <div className="h5">Katie</div>
+            <div className="h5"><p style={{color:'black', fontSize: 32, fontFamily:'Georgia'}}>Katie</p></div>
+
             <div className="genres-container">
               {this.state.genres}
             </div>
@@ -114,6 +116,7 @@ export default class Dashboard extends React.Component {
               </div>
             </div>
           </div>
+        </div>
         </div>
       </div>
     );
