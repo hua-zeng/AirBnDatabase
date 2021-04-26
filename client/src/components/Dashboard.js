@@ -95,7 +95,7 @@ export default class Dashboard extends React.Component {
         <br></br>
         <div className="container movies-container">
           <div className="jumbotron">
-            <div className="h5">Top Movies</div>
+            <div className="h5">Katie</div>
             <div className="genres-container">
               {this.state.genres}
             </div>
@@ -105,9 +105,9 @@ export default class Dashboard extends React.Component {
           <div className="jumbotron">
             <div className="movies-container">
               <div className="movies-header">
-                <div className="header-lg"><strong>Title</strong></div>
-                <div className="header"><strong>Rating</strong></div>
-                <div className="header"><strong>Vote Count</strong></div>
+                <div className="header-lg"><strong>Text1</strong></div>
+                <div className="header"><strong>Text2</strong></div>
+                <div className="header"><strong>Text3</strong></div>
               </div>
               <div className="results-container" id="results">
                 {this.state.movies}
