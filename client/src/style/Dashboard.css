@@ -3,6 +3,7 @@
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-start;
+  background-color: yellow;
   /* border-bottom: 1px solid #ddd; */
 }
 
@@ -12,23 +13,30 @@
   padding: 10px;
   cursor: pointer;
   box-sizing: border-box;
+  background-color: orange;
 }
 
 .genres-container .genre:hover {
   background-color: #ddd;
 }
-
+/* goes with text on bottom box as fill*/
 .movies-container .movies-header, .results-container .movie {
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
   height: 40px;
-}
 
+  
+}
+/* goes with text on bottom box on the left*/
 .movie .title, .movies-header .header-lg {
+
   flex: 1 0 50%;
 }
 
+/* goes with text on bottom box on the right*/
 .movies-header .header, .movie .rating, .movie .votes {
+
   flex: 1 0 25%;
+ 
 }
