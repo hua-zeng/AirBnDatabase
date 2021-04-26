@@ -31,12 +31,14 @@ export default class PageNavbar extends React.Component {
 		return (
 			<div className="PageNavbar">
 				<nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-			      <span className="navbar-brand center"><h1>AirBnDatabase</h1></span>
+			      <span className="navbar-brand center"><h1 style={{color: 'white', fontSize: 72}}>AirBnDatabase</h1></span>
 			      <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
 			        <div className="navbar-nav">
 			        {this.state.navDivs}
 			        </div>
 			      </div>
+				  <div><h4 style={{color: 'white', margin: 1, float: 'none'}}>Developers:</h4>
+				  <p style={{color: 'white'}}>Hua Zeng, Katie Pizziketti, Michelle Geng, Sidney Pho</p></div>
 			    </nav>
 			</div>
         );
