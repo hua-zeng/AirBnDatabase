@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 import Dashboard from './Dashboard';
 import Recommendations from './Recommendations';
-import BestGenres from './BestGenres';
+import Host from './Host';
 
 export default class App extends React.Component {
 
@@ -36,9 +36,9 @@ export default class App extends React.Component {
 							)}
 						/>
 						<Route
-							path="/bestgenres"
+							path="/host"
 							render={() => (
-								<BestGenres />
+								<Host />
 							)}
 						/>
 					</Switch>

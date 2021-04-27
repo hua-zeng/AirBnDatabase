@@ -1,10 +1,10 @@
 import React from 'react';
 import PageNavbar from './PageNavbar';
 import BestGenreRow from './BestGenreRow';
-import '../style/BestGenres.css';
+import '../style/Host.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-export default class BestGenre extends React.Component {
+export default class Host extends React.Component {
 	constructor(props) {
 		super(props);
 
@@ -18,7 +18,7 @@ export default class BestGenre extends React.Component {
 		this.handleChange = this.handleChange.bind(this);
 	}
 
-	/* ---- Q3a (Best Genres) ---- */
+
 	componentDidMount() {
 		fetch("http://localhost:8081/decades",
 		{
@@ -48,9 +48,9 @@ export default class BestGenre extends React.Component {
 		});
 	}
 
-	/* ---- Q3b (Best Genres) ---- */
+
 	submitDecade() {
-		fetch("http://localhost:8081/bestgenres/" + this.state.selectedDecade,
+		fetch("http://localhost:8081/host/",
 		{
 		  method: 'GET'
 		}).then(res => {
@@ -77,17 +77,18 @@ export default class BestGenre extends React.Component {
 	render() {
 
 		return (
-			<div className="BestGenres">
-				<PageNavbar active="bestgenres" />
+			<div className="Host">
+				<PageNavbar active="host" />
+				<div style={{backgroundColor: 'white', minHeight:1000}}>
 
-				<div className="container bestgenres-container">
+				<div className="container host-container">
 			      <div className="jumbotron">
-			        <div className="h5">Best Genres</div>
-
+			        <div className="h5">HOST</div>
+					<div> To see information about AirBnB Hosts and their listed properties, please select a target zipcode.
 			        <div className="years-container">
 			          <div className="dropdown-container">
 			            <select value={this.state.selectedDecade} onChange={this.handleChange} className="dropdown" id="decadesDropdown">
-			            	<option select value> -- select an option -- </option>
+			            	<option select value> -- select a zipcode -- </option>
 			            	{this.state.decades}
 			            </select>
 			            <button className="submit-btn" id="decadesSubmitBtn" onClick={this.submitDecade}>Submit</button>
@@ -97,8 +98,8 @@ export default class BestGenre extends React.Component {
 			      <div className="jumbotron">
 			        <div className="movies-container">
 			          <div className="movie">
-			            <div className="header"><strong>Genre</strong></div>
-			            <div className="header"><strong>Average Rating</strong></div>
+			            <div className="header"><strong>Host info</strong></div>
+			            <div className="header"><strong>Listings</strong></div>
 			          </div>
 			          <div className="movies-container" id="results">
 			            {this.state.genres}
@@ -106,6 +107,8 @@ export default class BestGenre extends React.Component {
 			        </div>
 			      </div>
 			    </div>
+			</div>
+			</div>
 			</div>
 		);
 	}
