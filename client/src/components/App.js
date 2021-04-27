@@ -5,8 +5,9 @@ import {
 	Switch
 } from 'react-router-dom';
 import Dashboard from './Dashboard';
-import Recommendations from './Recommendations';
+import Listings from './Listings';
 import Host from './Host';
+import Covid from './Covid';
 
 export default class App extends React.Component {
 
@@ -30,15 +31,21 @@ export default class App extends React.Component {
 							)}
 						/>
 						<Route
-							path="/recommendations"
+							path="/Listings"
 							render={() => (
-								<Recommendations />
+								<Listings />
 							)}
 						/>
 						<Route
 							path="/host"
 							render={() => (
 								<Host />
+							)}
+						/>
+						<Route
+							path="/Covid"
+							render={() => (
+								<Covid />
 							)}
 						/>
 					</Switch>

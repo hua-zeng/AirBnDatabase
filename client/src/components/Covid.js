@@ -1,10 +1,10 @@
 import React from 'react';
 import PageNavbar from './PageNavbar';
 import RecommendationsRow from './RecommendationsRow';
-import '../style/Recommendations.css';
+import '../style/Covid.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-export default class Recommendations extends React.Component {
+export default class Covid extends React.Component {
 	constructor(props) {
 		super(props);
 
@@ -25,10 +25,9 @@ export default class Recommendations extends React.Component {
 		});
 	}
 
-	/* ---- Q2 (Recommendations) ---- */
-	// Hint: Name of movie submitted is contained in `this.state.movieName`.
+
 	submitMovie() {
-		fetch("http://localhost:8081/recommendations/" + this.state.movieName,
+		fetch("http://localhost:8081/covid/" + this.state.movieName,
     {
       method: 'GET'
     }).then(res => {
@@ -56,24 +55,24 @@ export default class Recommendations extends React.Component {
 	render() {
 
 		return (
-			<div className="Recommendations">
-				<PageNavbar active="recommendations" />
-
+			<div className="Covid">
+				<PageNavbar active="covid" />
+				<div style={{backgroundColor: 'white', minHeight:1000}}>
 			    <div className="container recommendations-container">
 			    	<div className="jumbotron">
-			    		<div className="h5">Recommendations</div>
+			    		<div className="h5">COVID</div>
+						<p>Examine trends in COVID keywords in descriptions, availability, cleaning procedures, and booking percentages (how often people are booking).</p>
 			    		<br></br>
 			    		<div className="input-container">
-			    			<input type='text' placeholder="Enter Movie Name" value={this.state.movieName} onChange={this.handleMovieNameChange} id="movieName" className="movie-input"/>
+			    			<input type='text' placeholder="write something" value={this.state.movieName} onChange={this.handleMovieNameChange} id="movieName" className="movie-input"/>
 			    			<button id="submitMovieBtn" className="submit-btn" onClick={this.submitMovie}>Submit</button>
 			    		</div>
 			    		<div className="header-container">
-			    			<div className="h6">You may like ...</div>
 			    			<div className="headers">
-			    				<div className="header"><strong>Title</strong></div>
-			    				<div className="header"><strong>Movie ID</strong></div>
-					            <div className="header"><strong>Rating</strong></div>
-					            <div className="header"><strong>Vote Count</strong></div>
+			    				<div className="header"><strong>City</strong></div>
+			    				<div className="header"><strong>AirBnB Listings</strong></div>
+					            <div className="header"><strong>Hospital capacity</strong></div>
+					            <div className="header"><strong>Month</strong></div>
 			    			</div>
 			    		</div>
 			    		<div className="results-container" id="results">
@@ -82,6 +81,7 @@ export default class Recommendations extends React.Component {
 			    	</div>
 			    </div>
 		    </div>
+			</div>
 		);
 	}
 }

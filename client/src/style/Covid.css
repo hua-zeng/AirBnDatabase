@@ -2,6 +2,7 @@
   display: flex;
   flex-flow: column wrap;
   /* margin-top: 10px; */
+  margin: 25px;
 }
 
 .header-container .headers, .results-container .movieResults {
