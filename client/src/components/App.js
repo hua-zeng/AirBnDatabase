@@ -10,6 +10,7 @@ import Host from './Host';
 import Covid from './Covid';
 import Location from './Location';
 import Reviews from './Reviews';
+import About from './About';
 
 export default class App extends React.Component {
 
@@ -60,6 +61,12 @@ export default class App extends React.Component {
 							path="/Reviews"
 							render={() => (
 								<Reviews />
+							)}
+						/>
+						<Route
+							path="/About"
+							render={() => (
+								<About />
 							)}
 						/>
 					</Switch>
