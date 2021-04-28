@@ -34,37 +34,37 @@ export default class App extends React.Component {
 							)}
 						/>
 						<Route
-							path="/Listings"
+							path="/listings"
 							render={() => (
 								<Listings />
 							)}
 						/>
 						<Route
-							path="/Host"
+							path="/host"
 							render={() => (
 								<Host />
 							)}
 						/>
 						<Route
-							path="/Covid"
+							path="/covid"
 							render={() => (
 								<Covid />
 							)}
 						/>
 						<Route
-							path="/Location"
+							path="/locations"
 							render={() => (
 								<Location />
 							)}
 						/>
 						<Route
-							path="/Reviews"
+							path="/reviews"
 							render={() => (
 								<Reviews />
 							)}
 						/>
 						<Route
-							path="/About"
+							path="/about"
 							render={() => (
 								<About />
 							)}
