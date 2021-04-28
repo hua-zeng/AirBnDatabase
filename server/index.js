@@ -23,6 +23,6 @@ app.get('/listings', routes.getAllListings);
 app.get('/locations', routes.getAllLocations);
 
 
-app.listen(3000, () => {
-	console.log(`Server listening on PORT 3000`);
+app.listen(8081, () => {
+	console.log(`Server listening on PORT 8081`);
 });
