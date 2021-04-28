@@ -50,7 +50,7 @@ export default class Location extends React.Component {
 
 
 	submitDecade() {
-		fetch("http://localhost:8081/Location/",
+		fetch("http://localhost:8081/location/",
 		{
 		  method: 'GET'
 		}).then(res => {
