@@ -20,8 +20,21 @@ function getAllListings(req, res) {
   })
 };
 
+function getAllLocations(req, res) {
+  var query = `
+    SELECT * FROM airbnb.location LIMIT 10;;
+  `;
+  
+  connection.query(query, function(err, rows, fields) {
+    if (err) console.log(err);
+    else {
+      res.json(rows);
+    }
+  });
+};
 
 // The exported functions, which can be accessed in index.js.
 module.exports = {
-	getAllListings: getAllListings
+	getAllListings: getAllListings,
+  getAllLocations: getAllLocations
 }

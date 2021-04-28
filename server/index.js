@@ -20,6 +20,7 @@ app.get('/', (req, res) => {
 
 app.get('/listings', routes.getAllListings);
 
+app.get('/locations', routes.getAllLocations);
 
 
 app.listen(3000, () => {
