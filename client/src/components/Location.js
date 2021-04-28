@@ -3,6 +3,7 @@ import PageNavbar from './PageNavbar';
 import BestGenreRow from './BestGenreRow';
 import '../style/Location.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import BestLocationRow from './BestLocationRow';
 
 export default class Location extends React.Component {
 	constructor(props) {
@@ -35,26 +36,26 @@ export default class Location extends React.Component {
 
 	submitLocation() {
 		const url = "http://localhost:8081/location/" + this.state.selectedCity+"/"+this.state.selectedMonth;
-		console.log(url);
 		fetch(url,
 		{
 		  method: 'GET'
 		}).then(res => {
-			console.log(res.json());
 		  return res.json();
 		}, err => {
 		  console.log(err);
 		}).then(locationsList => {
+			console.log(locationsList);
 		  if (!locationsList) return;
-		  let location = locationsList.map((moviesObj, i) =>
-		  <BestGenreRow key={i} />
+		  let location = locationsList.map((locationsObj, i) =>
+		  
+		  <BestLocationRow key={i} url={locationsObj.url} listing_name={locationsObj.listing_name} neighborhood={locationsObj.neighborhood} 
+		  rating={locationsObj.review_scores_rating} price={locationsObj.price}/>
 		  );
-		  
-		  
-	
+
 		  this.setState({
 			  locations: location
 		  });
+
 		}, err => {
 		  // Print the error if there is one.
 		  console.log(err);
@@ -70,7 +71,7 @@ export default class Location extends React.Component {
 
 				<div className="container location-container">
 			      <div className="jumbotron">
-			        <div className="h5">LOCATION</div>
+			        <div className="h5"><strong>LOCATION</strong></div>
 					<div> Return all listings that were reviewed for all 12 months in 2020 and with the highest average rating score in descending order.
 
 			        <div className="zip-container">
@@ -100,9 +101,11 @@ export default class Location extends React.Component {
 			      </div>
 			      <div className="jumbotron">
 			        <div className="movies-container">
-			          <div className="movie">
-			            <div className="header"><strong>Rating</strong></div>
-			            <div className="header"><strong>Month</strong></div>
+			          <div className="movies-header">
+			            <div className="header"><strong>Listing</strong></div>
+			            <div className="header"><strong>Neighborhood</strong></div>
+						<div className="header"><strong>Rating (out of 100)</strong></div>
+			            <div className="header"><strong>Price</strong></div>
 			          </div>
 			          <div className="movies-container" id="results">
 			            {this.state.locations}

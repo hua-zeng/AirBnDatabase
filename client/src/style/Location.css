@@ -15,3 +15,9 @@
 .movieResults .title, .movieResults .id, .movieResults .rating, .movieResults .votes, .headers .header {
   flex: 1 0 25%;
 }
+
+.location {
+  column-count: 4;
+  font-size: 12px;
+  
+}
