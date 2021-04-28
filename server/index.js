@@ -18,7 +18,7 @@ app.get('/listings', routes.getAllListings);
 
 app.get('/location', routes.getAllLocations);
 
-app.get('/location/:selectedZipcode', routes.getListingsByZipcode);
+app.get('/location/:selectedCity/:selectedMonth', routes.getAllLocationsSpecifiedByCityAndMonth);
 
 
 app.listen(8081, () => {

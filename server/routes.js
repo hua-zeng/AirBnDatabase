@@ -34,10 +34,30 @@ function getAllLocations(req, res) {
 };
 
 
-function getAllListingsByZipcode(req, res) {
+function getAllLocationsSpecifiedByCityAndMonth(req, res) {
   var query = `
-  SELECT * FROM airbnb.location `
-}
+  SELECT c.url, c.listing_id, c.name as listing_name,
+  c.neighborhood, c.price,
+  rt.review_scores_rating, c.has_availability
+  FROM
+  (SELECT * FROM
+  airbnb.location lc
+  JOIN
+  airbnb.listing ls
+  ON lc.listing_id = ls.id
+  WHERE lc.city_name = '${req.params.selectedCity}' AND ls.data_month = '${req.params.selectedMonth}') c
+  JOIN
+  airbnb.review_quant rt
+  ON c.listing_id = rt.listing_id AND c.data_month = rt.data_month LIMIT 25`;
+
+  connection.query(query, function(err, rows, fields) {
+    if (err) console.log(err);
+    else {
+      res.json(rows);
+    }
+  });
+};
+
 
 
 
@@ -45,5 +65,5 @@ function getAllListingsByZipcode(req, res) {
 module.exports = {
 	getAllListings: getAllListings,
   getAllLocations: getAllLocations,
-  getAllListingsByZipcode: getListingsByZipcode
+  getAllLocationsSpecifiedByCityAndMonth: getAllLocationsSpecifiedByCityAndMonth
 }
