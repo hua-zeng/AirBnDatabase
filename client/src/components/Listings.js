@@ -4,7 +4,9 @@ import BestGenreRow from './BestGenreRow';
 import '../style/Listings.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-export default class Listings extends React.Component {
+// Use Homework 2 to figure out how to create the drop-down, create pseudo coding
+
+export default class Listings extends React.Component { // copy this from Homework 2
 	constructor(props) {
 		super(props);
 
@@ -18,9 +20,9 @@ export default class Listings extends React.Component {
 		this.handleChange = this.handleChange.bind(this);
 	}
 
-
+	// query database to get the info
 	componentDidMount() {
-		fetch("http://localhost:8081/decades",
+		fetch("http://localhost:8081/decades", // change this to zipcodes or whatever the name of the file is
 		{
 		  method: 'GET' 
 		}).then(res => {
@@ -49,7 +51,7 @@ export default class Listings extends React.Component {
 	}
 
 
-	submitDecade() {
+	submitDecade() { // one is a drop-down and the other is submit
 		fetch("http://localhost:8081/listings/",
 		{
 		  method: 'GET'
@@ -74,7 +76,7 @@ export default class Listings extends React.Component {
 		});	
 	}
 
-	render() {
+	render() { // render is the main method for the page, it's where everything shows up
 
 		return (
 			<div className="Listings">
@@ -89,7 +91,7 @@ export default class Listings extends React.Component {
 			          <div className="dropdown-container">
 			            <select value={this.state.selectedDecade} onChange={this.handleChange} className="dropdown" id="decadesDropdown">
 			            	<option select value> -- select a thing -- </option>
-			            	{this.state.decades}
+			            	{this.state.decades} {/* this.state.decades refers to something above the page, change to this.state.zipcode */}
 			            </select>
 			            <button className="submit-btn" id="decadesSubmitBtn" onClick={this.submitDecade}>Submit</button>
 			          </div>
