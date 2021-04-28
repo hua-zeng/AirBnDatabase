@@ -52,7 +52,7 @@ export default class App extends React.Component {
 							)}
 						/>
 						<Route
-							path="/locations"
+							path="/location"
 							render={() => (
 								<Location />
 							)}

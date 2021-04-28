@@ -26,7 +26,7 @@ export default class Location extends React.Component {
 
 
 	submitZipcode() {
-		fetch("http://localhost:8081/locations/"+this.state.selectedZipcode,
+		fetch("http://localhost:8081/location/"+this.state.selectedZipcode,
 		{
 		  method: 'GET'
 		}).then(res => {
@@ -47,7 +47,7 @@ export default class Location extends React.Component {
 		}, err => {
 		  // Print the error if there is one.
 		  console.log(err);
-		});
+		});	
 	}
 
 	render() {
@@ -64,7 +64,7 @@ export default class Location extends React.Component {
 
 			        <div className="zip-container">
 			          <div className="input-container">
-			            <input type='text' placeholder='Enter zip code' value={this.state.selectedZipcode} onChange={this.handleZipcodeChange} id="location" className="zipcode-input"/>
+			            <input type='text' placeholder='Enter zip code' value={this.state.selectedZipcode} onChange={this.handleZipcodeChange} id="location" className="movie-input"/>
 			            <button className="submit-btn" id="locationSubmitBtn" onClick={this.submitZipcode}>Submit</button>
 			          </div>
 			        </div>

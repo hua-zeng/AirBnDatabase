@@ -33,8 +33,17 @@ function getAllLocations(req, res) {
   });
 };
 
+
+function getAllListingsByZipcode(req, res) {
+  var query = `
+  SELECT * FROM airbnb.location `
+}
+
+
+
 // The exported functions, which can be accessed in index.js.
 module.exports = {
 	getAllListings: getAllListings,
-  getAllLocations: getAllLocations
+  getAllLocations: getAllLocations,
+  getAllListingsByZipcode: getListingsByZipcode
 }

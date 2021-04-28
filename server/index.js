@@ -16,9 +16,9 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 app.get('/listings', routes.getAllListings);
 
-app.get('/locations', routes.getAllLocations);
+app.get('/location', routes.getAllLocations);
 
-app.get('/locations', routes.getListingsWithZipcode);
+app.get('/location/:selectedZipcode', routes.getListingsByZipcode);
 
 
 app.listen(8081, () => {
