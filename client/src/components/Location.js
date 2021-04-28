@@ -9,48 +9,24 @@ export default class Location extends React.Component {
 		super(props);
 
 		this.state = {
-			selectedDecade: "",
+			selectedZipcode: "",
 			decades: [],
 			genres: []
 		};
 
-		this.submitDecade = this.submitDecade.bind(this);
-		this.handleChange = this.handleChange.bind(this);
+		this.submitZipcode = this.submitZipcode.bind(this);
+		this.handleZipcodeChange = this.handleZipcodeChange.bind(this);
 	}
 
-
-	componentDidMount() {
-		fetch("http://localhost:8081/decades",
-		{
-		  method: 'GET' 
-		}).then(res => {
-		  return res.json();
-		}, err => {
-		  console.log(err);
-		}).then(decList => {
-		  if (!decList) return;
-
-		  let allDecades = decList.map((decObj, i) =>
-		  <option value={decObj.decade}>{decObj.decade}</option>
-		  );
-	
-		  this.setState({
-			decades: allDecades
-		  });
-		}, err => {
-		  console.log(err);
-		});
-	}
-
-	handleChange(e) {
+	handleZipcodeChange(e) {
 		this.setState({
-			selectedDecade: e.target.value
+			selectedZipcode: e.target.value
 		});
 	}
 
 
-	submitDecade() {
-		fetch("http://localhost:8081/location/",
+	submitZipcode() {
+		fetch("http://localhost:8081/locations/"+this.state.selectedZipcode,
 		{
 		  method: 'GET'
 		}).then(res => {
@@ -71,7 +47,7 @@ export default class Location extends React.Component {
 		}, err => {
 		  // Print the error if there is one.
 		  console.log(err);
-		});	
+		});
 	}
 
 	render() {
@@ -87,12 +63,9 @@ export default class Location extends React.Component {
 					<div> Return listings around a certain location based on zip code, rating and month descending or sort by price.
 
 			        <div className="zip-container">
-			          <div className="dropdown-container">
-			            <select value={this.state.selectedDecade} onChange={this.handleChange} className="dropdown" id="decadesDropdown">
-			            	<option select value> -- select a zipcode -- </option>
-			            	{this.state.decades}
-			            </select>
-			            <button className="submit-btn" id="decadesSubmitBtn" onClick={this.submitDecade}>Submit</button>
+			          <div className="input-container">
+			            <input type='text' placeholder='Enter zip code' value={this.state.selectedZipcode} onChange={this.handleZipcodeChange} id="location" className="zipcode-input"/>
+			            <button className="submit-btn" id="locationSubmitBtn" onClick={this.submitZipcode}>Submit</button>
 			          </div>
 			        </div>
 			      </div>

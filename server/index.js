@@ -18,6 +18,8 @@ app.get('/listings', routes.getAllListings);
 
 app.get('/locations', routes.getAllLocations);
 
+app.get('/locations', routes.getListingsWithZipcode);
+
 
 app.listen(8081, () => {
 	console.log(`Server listening on PORT 8081`);
