@@ -72,7 +72,7 @@ export default class Location extends React.Component {
 				<div className="container location-container">
 			      <div className="jumbotron">
 			        <div className="h5"><strong>LOCATION</strong></div>
-					<div> Return all listings that were reviewed for all 12 months in 2020 and with the highest average rating score in descending order.
+					<div> Return all listings that were reviewed for all 12 months in 2020 and with the highest average rating score.
 
 			        <div className="zip-container">
 			          <div className="input-container">

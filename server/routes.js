@@ -45,10 +45,10 @@ function getAllLocationsSpecifiedByCityAndMonth(req, res) {
   JOIN
   airbnb.listing ls
   ON lc.listing_id = ls.id
-  WHERE lc.city_name = '${req.params.selectedCity}' AND ls.data_month = '${req.params.selectedMonth}') c
+  WHERE lc.city_name = '${req.params.selectedCity}' AND ls.data_month = '${req.params.selectedMonth}' AND lc.neighborhood IS NOT NULL) c
   JOIN
   airbnb.review_quant rt
-  ON c.listing_id = rt.listing_id AND c.data_month = rt.data_month LIMIT 25`;
+  ON c.listing_id = rt.listing_id AND c.data_month = rt.data_month LIMIT 30`;
 
   connection.query(query, function(err, rows, fields) {
     if (err) console.log(err);
