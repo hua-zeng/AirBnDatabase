@@ -1,6 +1,6 @@
 import React from 'react';
 import PageNavbar from './PageNavbar';
-import RecommendationsRow from './RecommendationsRow';
+import ReviewsRow from './ReviewsRow';
 import '../style/Reviews.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -8,42 +8,43 @@ export default class Reviews extends React.Component {
 	constructor(props) {
 		super(props);
 
-		// State maintained by this React component is the selected movie name,
-		// and the list of recommended movies.
-		this.state = {
-			movieName: "",
-			recMovies: []
+		// State maintained by this React component is the selected review name,
+		// and the list of review returned by searching key words.
+		this.state = { 
+			reviewKey: "",
+			recReviews: []
 		}
-
-		this.handleMovieNameChange = this.handleMovieNameChange.bind(this);
-		this.submitMovie = this.submitMovie.bind(this);
+		this.handleReviewKeyChange = this.handleReviewKeyChange.bind(this);
+		this.submitReviewKey = this.submitReviewKey.bind(this);
 	}
 
-	handleMovieNameChange(e) {
+	handleReviewKeyChange(e) {
 		this.setState({
-			movieName: e.target.value
+			reviewKey: e.target.value
 		});
+		
 	}
 
+	
 
-	submitMovie() {
-		fetch("http://localhost:8081/reviews/" + this.state.movieName,
+	submitReviewKey() {
+		fetch("http://localhost:8081/reviews/" + this.state.reviewKey,
     {
       method: 'GET'
     }).then(res => {
       return res.json();
     }, err => {
       console.log(err);
-    }).then(moviesList => {
-      if (!moviesList) return;
-      let movie = moviesList.map((moviesObj, i) =>
+    }).then(reviewList => {
+      if (!reviewList) return;
+      let reviewDivs = reviewList.map((review, i) =>
 
-      <RecommendationsRow title={moviesObj.title} id={moviesObj.id} rating={moviesObj.rating} votes={moviesObj.vote_count} />
+      <ReviewsRow city={review.city_name} name={review.name} review={review.comments} month={review.data_month} />
       );
       
 
       this.setState({
-		  recMovies: movie
+				recReviews: reviewDivs
 	  });
     }, err => {
       // Print the error if there is one.
@@ -53,30 +54,29 @@ export default class Reviews extends React.Component {
 
 	
 	render() {
-
 		return (
 			<div className="Reviews">
 				<PageNavbar active="reviews" />
 				<div style={{backgroundColor: 'white', minHeight:1000}}>
-			    <div className="container recommendations-container">
+			    <div className="container reviews-container">
 			    	<div className="jumbotron">
 			    		<div className="h5">REVIEWS</div>
 						<p>Reviews of listings.</p>
 			    		<br></br>
 			    		<div className="input-container">
-			    			<input type='text' placeholder="write something" value={this.state.movieName} onChange={this.handleMovieNameChange} id="movieName" className="movie-input"/>
-			    			<button id="submitMovieBtn" className="submit-btn" onClick={this.submitMovie}>Submit</button>
+			    			<input type='text' placeholder="write something" value={this.state.reviewKey} onChange={this.handleReviewKeyChange} id="reviewKey" className="review-input"/>
+			    			<button id="submitReviewKeyBtn" className="submit-btn" onClick={this.submitReviewKey}>Submit</button>
 			    		</div>
 			    		<div className="header-container">
 			    			<div className="headers">
 			    				<div className="header"><strong>City</strong></div>
-			    				<div className="header"><strong>AirBnB Listings</strong></div>
-					            <div className="header"><strong>Reviews</strong></div>
+			    				<div className="header"><strong>AirBnB Listing Name</strong></div>
+					            <div className="header"><strong>Review</strong></div>
 					            <div className="header"><strong>Month</strong></div>
 			    			</div>
 			    		</div>
 			    		<div className="results-container" id="results">
-			    			{this.state.recMovies}
+			    			{this.state.recReviews}
 			    		</div>
 			    	</div>
 			    </div>

@@ -20,6 +20,7 @@ app.get('/location', routes.getAllLocations);
 
 app.get('/location/:selectedCity/:selectedMonth', routes.getAllLocationsSpecifiedByCityAndMonth);
 
+app.get('/reviews/:reviewKey', routes.getRecs);
 
 app.listen(8081, () => {
 	console.log(`Server listening on PORT 8081`);
