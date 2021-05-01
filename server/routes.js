@@ -20,6 +20,7 @@ function getAllListings(req, res) {
   })
 };
 
+
 function getAllLocations(req, res) {
   var query = `
     SELECT * FROM airbnb.location LIMIT 10;;
@@ -33,7 +34,7 @@ function getAllLocations(req, res) {
   });
 };
 
-
+/*This route gives the location of all available listings given the city and month.*/
 function getAllLocationsSpecifiedByCityAndMonth(req, res) {
   var query = `
   SELECT c.url, c.listing_id, c.name as listing_name,
@@ -58,9 +59,9 @@ function getAllLocationsSpecifiedByCityAndMonth(req, res) {
   });
 };
 
+/*This route displays all reviews based on a keyword. */
 function getRecs(req, res) {
   var inputReviewKey = req.params.reviewKey;
-  console.log(inputReviewKey);
   var query = `
       SELECT 
       C2.city_name, C2.name, 
@@ -92,6 +93,8 @@ function getRecs(req, res) {
     });  
 };
 
+/* This route displays all information regarding covid hospitalization rates
+and cancellations.*/
 function getCovidCancellations(req, res) {
   var query =`WITH covid_cancellations AS (
     SELECT COUNT(*) AS cancellations, month(date) AS data_month
@@ -124,8 +127,6 @@ function getCovidCancellations(req, res) {
     }
   });
 };
-
-
 
 
 // The exported functions, which can be accessed in index.js.

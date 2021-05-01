@@ -21,6 +21,7 @@ app.get('/location', routes.getAllLocations);
 app.get('/location/:selectedCity/:selectedMonth', routes.getAllLocationsSpecifiedByCityAndMonth);
 
 app.get('/reviews/:reviewKey', routes.getRecs);
+
 app.get('/covid/:selectedCity', routes.getCovidCancellations);
 
 
