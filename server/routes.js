@@ -82,7 +82,7 @@ function getRecs(req, res) {
       AND C1.data_month = MONTH(RQ.date)) C2
       JOIN airbnb.reviewer RV
       ON C2.reviewer_id = RV.id
-      WHERE UPPER(C2.comments) LIKE UPPER('%${inputReviewKey}%') LIMIT 10;
+      WHERE UPPER(C2.comments) LIKE UPPER('%${inputReviewKey}%');
     `; 
     
     connection.query(query, function(err, rows, fields) {
