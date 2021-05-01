@@ -16,6 +16,8 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 app.get('/listings', routes.getAllListings);
 
+app.get('/listings/:writtenZipcode/:writtenAmenities', routes.getAllListingsByZipcodeAndAmenities);
+
 app.get('/location', routes.getAllLocations);
 
 app.get('/location/:selectedCity/:selectedMonth', routes.getAllLocationsSpecifiedByCityAndMonth);

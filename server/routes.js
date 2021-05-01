@@ -20,6 +20,25 @@ function getAllListings(req, res) {
   })
 };
 
+function getAllListingsByZipcodeAndAmenities(req, res) {
+  var query = `
+    Select c.url, c.name, c.zipcode, c.name, c.neighborhood, c.city_name, c.listing_id, c.amenities 
+    FROM 
+    (SELECT * FROM
+	  airbnb.location lc
+      JOIN
+      airbnb.listing ls
+      ON lc.listing_id = ls.id
+      WHERE lc.zipcode = ${req.params.writtenZipcode} and lc.neighborhood IS NOT NULL  and UPPER(ls.amenities) LIKE UPPER('%${req.params.selectedCity}%')) c LIMIT 30`;
+
+  connection.query(query, function(err, rows, fields) {
+    if (err) console.log(err);
+    else {
+      res.json(rows);
+    }
+  });
+};
+
 
 function getAllLocations(req, res) {
   var query = `
@@ -132,6 +151,7 @@ function getCovidCancellations(req, res) {
 // The exported functions, which can be accessed in index.js.
 module.exports = {
 	getAllListings: getAllListings,
+  getAllListingsByZipcodeAndAmenities: getAllListingsByZipcodeAndAmenities,
   getAllLocations: getAllLocations,
   getAllLocationsSpecifiedByCityAndMonth: getAllLocationsSpecifiedByCityAndMonth,
   getRecs: getRecs,
