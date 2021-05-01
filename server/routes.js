@@ -58,12 +58,38 @@ function getAllLocationsSpecifiedByCityAndMonth(req, res) {
   });
 };
 
-
+function getRecs(req, res) {
+  var inputReviewKey = req.params.reviewKey;
+  console.log(inputReviewKey);
+  var query = `
+    SELECT C1.city_name, C1.name, 
+    RQ.comments, C1.data_month 
+    FROM 
+    (SELECT LS.id, LS.name, 
+    LS.data_month, LC.city_name
+    FROM
+    airbnb.listing LS
+    JOIN airbnb.location LC
+    ON LS.id = LC.listing_id) C1 
+    JOIN airbnb.review_qual RQ
+    ON C1.id = RQ.listing_id 
+    AND C1.data_month = MONTH(date)
+    WHERE UPPER(RQ.comments) LIKE UPPER('%${inputReviewKey}%') LIMIT 10;
+    `; 
+    
+    connection.query(query, function(err, rows, fields) {
+      if (err) console.log(err);
+      else {
+        res.json(rows);
+      }
+    });  
+};
 
 
 // The exported functions, which can be accessed in index.js.
 module.exports = {
 	getAllListings: getAllListings,
   getAllLocations: getAllLocations,
-  getAllLocationsSpecifiedByCityAndMonth: getAllLocationsSpecifiedByCityAndMonth
+  getAllLocationsSpecifiedByCityAndMonth: getAllLocationsSpecifiedByCityAndMonth,
+  getRecs: getRecs
 }
