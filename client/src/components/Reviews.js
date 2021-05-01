@@ -37,7 +37,7 @@ export default class Reviews extends React.Component {
       if (!reviewList) return;
       let reviewDivs = reviewList.map((review, i) =>
 			
-      <ReviewsRow city={review.city_name} name={review.name} comment={review.comments} reviewer={review.reviewer_name} date={review.date} />
+      <ReviewsRow key={i} city={review.city_name} name={review.name} comment={review.comments} reviewer={review.reviewer_name} date={review.date} />
 
       );
       

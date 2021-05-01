@@ -8,6 +8,72 @@ var connection = mysql.createPool(config);
 /* ------------------- Route Handlers --------------- */
 /* -------------------------------------------------- */
 
+function getAllCities(req, res) {
+  var query = `
+    SELECT DISTINCT city_name
+    FROM airbnb.covid_hospitalization;
+  `;
+  
+  connection.query(query, function(err, rows, fields) {
+    if (err) console.log(err);
+    else {
+      res.json(rows);
+    }
+  });
+};
+
+function getTopInCity(req, res) {
+  var inputCity = req.params.city;
+  console.log(inputCity);
+  var query = `
+    SELECT t.listing_id, t.listing_name,
+    lc.city_name, lc.neighborhood,
+    t.avg_review_scores_rating, t.number_of_reviews
+    FROM
+    (SELECT c.*, l.listing_name
+    FROM
+    (SELECT r.*, rq.avg_review_scores_rating, rq.number_of_reviews
+    FROM
+    (SELECT listing_id,
+    COUNT(DISTINCT MONTH(date)) as num_months_reviewed
+    FROM airbnb.review_qual
+    GROUP BY listing_id
+    HAVING COUNT(DISTINCT MONTH(date))=12) r
+    JOIN
+    (SELECT listing_id,
+    AVG(review_scores_rating) AS avg_review_scores_rating,
+    SUM(number_of_reviews) AS number_of_reviews
+    FROM airbnb.review_quant
+    GROUP BY listing_id) rq
+    ON r.listing_id = rq.listing_id
+    WHERE avg_review_scores_rating IN
+    (SELECT
+    MAX(avg_review_scores_rating) AS avg_review_scores_rating
+    FROM
+    (SELECT listing_id,
+    AVG(review_scores_rating) AS avg_review_scores_rating
+    FROM airbnb.review_quant
+    GROUP BY listing_id) s1
+    )) c
+    JOIN
+    (SELECT DISTINCT id,
+    name as listing_name
+    FROM airbnb.listing) l
+    ON c.listing_id = l.id) t
+    JOIN airbnb.location lc
+    ON t.listing_id = lc.listing_id
+    WHERE city_name = '${inputCity}'
+    ORDER BY listing_id;
+  `;
+  
+  connection.query(query, function(err, rows, fields) {
+    if (err) console.log(err);
+    else {
+      res.json(rows);
+    }
+  });  
+};
+
 function getAllListings(req, res) {
   var query = `
   SELECT * FROM airbnb.listing LIMIT 10;
@@ -131,6 +197,8 @@ function getCovidCancellations(req, res) {
 
 // The exported functions, which can be accessed in index.js.
 module.exports = {
+  getAllCities: getAllCities,
+  getTopInCity: getTopInCity,
 	getAllListings: getAllListings,
   getAllLocations: getAllLocations,
   getAllLocationsSpecifiedByCityAndMonth: getAllLocationsSpecifiedByCityAndMonth,

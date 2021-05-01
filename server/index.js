@@ -13,6 +13,9 @@ app.use(bodyParser.urlencoded({extended: false}));
 /* ------------------- Route handler registration ----------------- */
 /* ---------------------------------------------------------------- */
 
+app.get('/cities', routes.getAllCities);
+
+app.get('/cities/:city', routes.getTopInCity);
 
 app.get('/listings', routes.getAllListings);
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../style/Reviews.css';
 
 export default class ReviewsRow extends React.Component {
 	constructor(props) {

@@ -15,3 +15,13 @@
 .movieResults .title, .movieResults .id, .movieResults .rating, .movieResults .votes, .headers .header {
   flex: 1 0 25%;
 }
+
+.city, .name, .comment, .reviewer, .date{
+  max-width: 600px;
+  max-height: 50px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: wrap;
+}
+
+

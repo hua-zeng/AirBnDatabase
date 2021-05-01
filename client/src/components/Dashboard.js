@@ -10,20 +10,20 @@ export default class Dashboard extends React.Component {
   constructor(props) {
     super(props);
 
-    // The state maintained by this React Component. This component maintains the list of genres,
-    // and a list of movies for a specified genre.
-    this.state = {
-      genres: [],
-      movies: []
+    // The state maintained by this React Component. This component maintains the list of cities,
+    // and a list of listings for a specified city.
+    this.state = { 
+      cities: [], 
+      listings: [] 
     }
-
-    this.showMovies = this.showMovies.bind(this);
+    
+    this.showListings = this.showListings.bind(this);
   }
 
   // React function that is called when the page load.
   componentDidMount() {
     // Send an HTTP request to the server.
-    fetch("http://localhost:8081/genres",
+    fetch("http://localhost:8081/cities",
     {
       method: 'GET' // The type of HTTP request.
     }).then(res => {
@@ -32,19 +32,19 @@ export default class Dashboard extends React.Component {
     }, err => {
       // Print the error if there is one.
       console.log(err);
-    }).then(genreList => {
-      if (!genreList) return;
+    }).then(cityList => {
+      if (!cityList) return;
       // Map each genreObj in genreList to an HTML element:
-      // A button which triggers the showMovies function for each genre.
-      let genreDivs = genreList.map((genreObj, i) =>
-      <GenreButton id={"button-" + genreObj.genre} onClick={() => this.showMovies(genreObj.genre)} genre={genreObj.genre} />
+      // A button which triggers the showMovies function for each city.
+      let cityDivs = cityList.map((cityObj, i) =>
+      <GenreButton id={"button-" + cityObj.city} onClick={() => this.showListings(cityObj.city)} city={cityObj.city} />
       );
 
       
 
-      // Set the state of the genres list to the value returned by the HTTP response from the server.
+      // Set the state of the cities list to the value returned by the HTTP response from the server.
       this.setState({
-        genres: genreDivs
+        cities: cityDivs
       });
     }, err => {
       // Print the error if there is one.
@@ -55,31 +55,31 @@ export default class Dashboard extends React.Component {
 
   /* ---- Q1b (Dashboard) ---- */
   /* Set this.state.movies to a list of <DashboardMovieRow />'s. */
-  showMovies(genre) {
+  showListings(city) {
   //similar to component did mount
-  //fetch from fetch("http://localhost:8081/genres" + genre,
+  //fetch from fetch("http://localhost:8081/cities" + city,
 
   //get method
   //line 39: instead of genrebutton, use dashboardmovierow
-  // set state to movies
-  fetch("http://localhost:8081/genres/" + genre,
+  // set state to listings 
+  fetch("http://localhost:8081/cities/" + city,
     {
       method: 'GET'
     }).then(res => {
       return res.json();
     }, err => {
-      console.log(err);
-    }).then(moviesList => {
-      if (!moviesList) return;
-      let movie = moviesList.map((moviesObj, i) =>
+      console.log(err); 
+    }).then(listingsList => {
+      if (!listingsList) return;
+      let listing = listingsList.map((listingsObj, i) =>
 
-      <DashboardMovieRow title={moviesObj.title} rating={moviesObj.rating} votes={moviesObj.votes} />
+      <DashboardMovieRow listing_id={listingsObj.listing_id} listing_name={listingsObj.listing_name} city_name={listingsObj.city_name} neighborhood={listingsObj.neighborhood} avg_review_scores_rating={listingsObj.avg_review_scores_rating} number_of_reviews={listingsObj.number_of_reviews}/>
       );
       
 
-      // Set the state of the genres list to the value returned by the HTTP response from the server.
+      // Set the state of the cities list to the value returned by the HTTP response from the server.
       this.setState({
-        movies: movie
+        listings: listing
       });
     }, err => {
       // Print the error if there is one.
@@ -98,7 +98,7 @@ export default class Dashboard extends React.Component {
         <br></br>
         <div className="container movies-container">
           <div className="jumbotron">
-            <div className="h5"><p style={{color:'black', fontSize: 32, fontFamily:'Georgia'}}>Katie</p></div>
+            <div className="h5"><p style={{color:'black', fontSize: 32, fontFamily:'Georgia'}}>Top Listings</p></div>
 
           </div>
 
@@ -106,12 +106,15 @@ export default class Dashboard extends React.Component {
           <div className="jumbotron">
             <div className="movies-container">
               <div className="movies-header">
-                <div className="header-lg"><strong>Text1</strong></div>
-                <div className="header"><strong>Text2</strong></div>
-                <div className="header"><strong>Text3</strong></div>
+                <div className="header-lg"><strong>listing_id</strong></div>
+                <div className="header"><strong>listing_name</strong></div>
+                <div className="header"><strong>city_name</strong></div>
+                <div className="header-lg"><strong>neighborhood</strong></div>
+                <div className="header"><strong>avg_review_scores_rating</strong></div>
+                <div className="header"><strong>number_of_reviews</strong></div>
               </div>
               <div className="results-container" id="results">
-                {this.state.movies}
+                {this.state.listings}
               </div>
             </div>
           </div>
