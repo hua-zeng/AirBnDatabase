@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import PageNavbar from './PageNavbar';
 import GenreButton from './GenreButton';
 import DashboardMovieRow from './DashboardMovieRow';
+import { Line } from 'react-chartjs-2';
 
 export default class Dashboard extends React.Component {
   constructor(props) {
@@ -87,6 +88,40 @@ export default class Dashboard extends React.Component {
 }
 
   render() {    
+
+    const data = {
+      labels: ['1', '2', '3', '4', '5', '6'],
+      datasets: [
+        {
+          label: 'Cancellations',
+          data: [30, 9, 33, 15, 52, 13],
+          fill: false,
+          backgroundColor: 'rgb(255, 99, 132)',
+          borderColor: 'rgb(0,0,0)',
+        },
+        {
+          label: 'COVID cases',
+          data: [12, 19, 3, 5, 2, 3],
+          fill: true,
+          backgroundColor: 'rgb(255, 99, 132)',
+          borderColor: 'rgba(255, 99, 132, 0.2)',
+        },
+      ],
+    };
+
+    const options = {
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              beginAtZero: true,
+            },
+          },
+        ],
+      },
+    };
+
+
     return (
       <div className="Dashboard">
         <div style={{backgroundColor: 'white', minHeight:1000}}>
@@ -98,9 +133,9 @@ export default class Dashboard extends React.Component {
           <div className="jumbotron">
             <div className="h5"><p style={{color:'black', fontSize: 32, fontFamily:'Georgia'}}>Katie</p></div>
 
-            <div className="genres-container">
-              {this.state.genres}
-            </div>
+
+              <Line data={data} options={options}/>
+
           </div>
 
           <br></br>
