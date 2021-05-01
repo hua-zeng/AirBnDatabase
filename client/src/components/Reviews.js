@@ -25,7 +25,6 @@ export default class Reviews extends React.Component {
 		
 	}
 
-	
 
 	submitReviewKey() {
 		fetch("http://localhost:8081/reviews/" + this.state.reviewKey,
@@ -38,8 +37,9 @@ export default class Reviews extends React.Component {
     }).then(reviewList => {
       if (!reviewList) return;
       let reviewDivs = reviewList.map((review, i) =>
+			
+      <ReviewsRow city={review.city_name} name={review.name} comment={review.comments} reviewer={review.reviewer_name} date={review.date} />
 
-      <ReviewsRow city={review.city_name} name={review.name} review={review.comments} month={review.data_month} />
       );
       
 
@@ -69,10 +69,11 @@ export default class Reviews extends React.Component {
 			    		</div>
 			    		<div className="header-container">
 			    			<div className="headers">
-			    				<div className="header"><strong>City</strong></div>
-			    				<div className="header"><strong>AirBnB Listing Name</strong></div>
-					            <div className="header"><strong>Review</strong></div>
-					            <div className="header"><strong>Month</strong></div>
+										<div className="header"><strong>City</strong></div>
+										<div className="header"><strong>AirBnB Listing Name</strong></div>
+										<div className="header"><strong>Comment</strong></div>
+										<div className="header"><strong>Reviewer</strong></div>
+										<div className="header"><strong>Date</strong></div>
 			    			</div>
 			    		</div>
 			    		<div className="results-container" id="results">

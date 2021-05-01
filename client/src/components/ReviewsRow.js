@@ -11,8 +11,9 @@ export default class ReviewsRow extends React.Component {
 			<div className="reviewResults">
 				<div className="city">{this.props.city}</div>
 				<div className="name">{this.props.name}</div>
-				<div className="review">{this.props.review}</div>
-				<div className="month">{this.props.month}</div>
+				<div className="comment">{this.props.comment}</div>
+				<div className="reviewer">{this.props.reviewer}</div>
+				<div className="date">{this.props.date}</div>
 			</div>
 		);
 	}
