@@ -42,14 +42,14 @@ export default class Reviews extends React.Component {
       console.log(err);
     }).then(listingsList => {
       if (!listingsList) return;
-      let listingDivss = listingsList.map((listingsObj, i) =>
+      let listingDivs = listingsList.map((listingsObj, i) =>
 	
 	  // DO I NEED TO ADD key={i} here? I don't think so because reviews doesn't but location does
       <ListingsRow zipcode={listingsObj.zipcode} url = {listingsObj.url} name={listingsObj.name} neighborhood={listingsObj.neighborhood} amenities={listingsObj.amenities} />
       );
 
       this.setState({
-		listingsKey: listingDivss
+		listingsKey: listingDivs
 	  });
     }, err => {
       // Print the error if there is one.
@@ -73,7 +73,7 @@ export default class Reviews extends React.Component {
 						<div className="zip-container">
 			    		<div className="input-container">
 							Please enter zipcode: &nbsp;
-							{/* Add back the placeholders. do I need id and classname for the input tags for writtenAmenities */}
+							{/* Add back the placeholders. Do I need id and classname for the input tags for writtenAmenities? */}
 			    				<input type='text' placeholder="94117" value={this.state.writtenZipcode} onChange={this.handleWrittenZipcodeChange}  id="listings" className="listings-input"/>
 							 	&nbsp; &nbsp; &nbsp; ... and please enter amenity: &nbsp; <input type='text' value={this.state.writtenAmenities} onChange={this.handleWrittenAmenitiesChange} id="listings" className="listings-input"/>
 								<button id="submitListingsKeyBtn" className="submit-btn" onClick={this.submitListings}>Submit</button>
