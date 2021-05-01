@@ -58,6 +58,39 @@ function getAllLocationsSpecifiedByCityAndMonth(req, res) {
   });
 };
 
+function getRecs(req, res) {
+  var inputReviewKey = req.params.reviewKey;
+  console.log(inputReviewKey);
+  var query = `
+      SELECT 
+      C2.city_name, C2.name, 
+      C2.comments, RV.reviewer_name, C2.date
+      FROM
+      (SELECT 
+      C1.city_name, C1.name, 
+      RQ.comments, RQ.date, RQ.reviewer_id
+      FROM 
+      (SELECT LS.id, LS.name, 
+      LS.data_month, LC.city_name
+      FROM
+      airbnb.listing LS
+      JOIN airbnb.location LC
+      ON LS.id = LC.listing_id) C1 
+      JOIN airbnb.review_qual RQ
+      ON C1.id = RQ.listing_id 
+      AND C1.data_month = MONTH(RQ.date)) C2
+      JOIN airbnb.reviewer RV
+      ON C2.reviewer_id = RV.id
+      WHERE UPPER(C2.comments) LIKE UPPER('%${inputReviewKey}%') LIMIT 10;
+    `; 
+    
+    connection.query(query, function(err, rows, fields) {
+      if (err) console.log(err);
+      else {
+        res.json(rows);
+      }
+    });  
+};
 
 function getCovidCancellations(req, res) {
   var query =`WITH covid_cancellations AS (
@@ -100,5 +133,6 @@ module.exports = {
 	getAllListings: getAllListings,
   getAllLocations: getAllLocations,
   getAllLocationsSpecifiedByCityAndMonth: getAllLocationsSpecifiedByCityAndMonth,
+  getRecs: getRecs,
   getCovidCancellations: getCovidCancellations
 }
