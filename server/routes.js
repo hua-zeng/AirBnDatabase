@@ -92,11 +92,47 @@ function getRecs(req, res) {
     });  
 };
 
+function getCovidCancellations(req, res) {
+  var query =`WITH covid_cancellations AS (
+    SELECT COUNT(*) AS cancellations, month(date) AS data_month
+    FROM airbnb.review_qual A
+    JOIN airbnb.listing B
+    ON A.listing_id = B.id
+    JOIN airbnb.location C
+    ON B.id = C.listing_id
+    WHERE city_name = '${req.params.selectedCity}'
+    AND (comments LIKE '%covid%' OR comments LIKE '%cancel%')
+    GROUP BY month(date)),
+
+    covid_cases AS (
+      SELECT AVG(num_covid_hosp) AS covid_cases, month(date) AS data_month
+      FROM airbnb.covid_hospitalization
+      WHERE city_name = '${req.params.selectedCity}' 
+      GROUP BY month(date))
+
+  SELECT A.data_month, covid_cases, cancellations
+  FROM covid_cases C
+  JOIN
+  covid_cancellations A
+  ON
+  C.data_month = A.data_month`;
+
+  connection.query(query, function(err, rows, fields) {
+    if (err) console.log(err);
+    else {
+      res.json(rows);
+    }
+  });
+};
+
+
+
 
 // The exported functions, which can be accessed in index.js.
 module.exports = {
 	getAllListings: getAllListings,
   getAllLocations: getAllLocations,
   getAllLocationsSpecifiedByCityAndMonth: getAllLocationsSpecifiedByCityAndMonth,
-  getRecs: getRecs
+  getRecs: getRecs,
+  getCovidCancellations: getCovidCancellations
 }

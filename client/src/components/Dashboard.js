@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import PageNavbar from './PageNavbar';
 import GenreButton from './GenreButton';
 import DashboardMovieRow from './DashboardMovieRow';
+import { Line } from 'react-chartjs-2';
 
 export default class Dashboard extends React.Component {
   constructor(props) {
@@ -87,6 +88,7 @@ export default class Dashboard extends React.Component {
 }
 
   render() {    
+
     return (
       <div className="Dashboard">
         <div style={{backgroundColor: 'white', minHeight:1000}}>
@@ -98,9 +100,6 @@ export default class Dashboard extends React.Component {
           <div className="jumbotron">
             <div className="h5"><p style={{color:'black', fontSize: 32, fontFamily:'Georgia'}}>Katie</p></div>
 
-            <div className="genres-container">
-              {this.state.genres}
-            </div>
           </div>
 
           <br></br>
