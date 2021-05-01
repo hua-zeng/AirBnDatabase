@@ -1,17 +1,33 @@
-.movies-container {
+
+
+.header-container, .results-container {
   display: flex;
   flex-flow: column wrap;
-  margin-top: 10px;
+  /* margin-top: 10px; */
+  margin: 25px;
 }
 
-.movies-container .movie, .movies-container .movieResults {
+.header-container .headers, .results-container .movieResults {
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
   height: 40px;
-  padding: 0 10px;
 }
 
-.movie .header, .movieResults .title, .movieResults .host, .movieResults .votes, .movieResults .year, .movieResults .rating {
+.movieResults .title, .movieResults .id, .movieResults .rating, .movieResults .votes, .headers .header {
   flex: 1 0 25%;
+}
+
+.listing {
+  column-count: 4;
+  font-size: 12px;
+  white-space: nowrap;
+  padding-bottom: 1px;
+}
+
+.listing_name {
+  max-width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
