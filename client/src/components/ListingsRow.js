@@ -1,12 +1,12 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../style/Listings.css';
-​
+
 export default class ListingsRow extends React.Component {
 	constructor(props) {
 		super(props);
 	}
-​
+
 	render() {
 		return (
 			<div className="listingsResults">
