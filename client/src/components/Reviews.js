@@ -67,13 +67,7 @@ export default class Reviews extends React.Component {
 			    			<button id="submitReviewKeyBtn" className="submit-btn" onClick={this.submitReviewKey}>Submit</button>
 			    		</div>
 			    		<div className="header-container">
-			    			<div className="headers">
-										<div className="header"><strong>City</strong></div>
-										<div className="header"><strong>AirBnB Listing Name</strong></div>
-										<div className="header"><strong>Comment</strong></div>
-										<div className="header"><strong>Reviewer</strong></div>
-										<div className="header"><strong>Date</strong></div>
-			    			</div>
+			    			
 			    		</div>
 			    		<div className="reviews-container" id="results">
 			    			{this.state.recReviews}
