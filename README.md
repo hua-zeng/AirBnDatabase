@@ -4,16 +4,16 @@ Instructions for building locally:
 
 1. Open terminal and change directory into client folder.
    a) run the following commands in the terminal:
-        npm install
-        npm install --save react-chartjs-2 chart.js
-        npm update
-        npm start
+        `npm install`
+        `npm install --save react-chartjs-2 chart.js`
+        `npm update`
+        `npm start`
 
 2. Open another terminal and change directory into server folder.
     b) run the following commands in the terminal:
-        npm install
-        npm update
-        npm start
+        `npm install`
+        `npm update`
+        `npm start`
 
 3. The app should be up and running now!
 
