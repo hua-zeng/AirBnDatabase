@@ -1,6 +1,5 @@
 import React from 'react';
 import PageNavbar from './PageNavbar';
-import BestGenreRow from './BestGenreRow';
 import '../style/Location.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import BestLocationRow from './BestLocationRow';

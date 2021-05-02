@@ -4,7 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import PageNavbar from './PageNavbar';
 import GenreButton from './GenreButton';
 import DashboardMovieRow from './DashboardMovieRow';
-import { Line } from 'react-chartjs-2';
+import '../style/Dashboard.css';
+
 
 export default class Dashboard extends React.Component {
   constructor(props) {
@@ -98,8 +99,12 @@ export default class Dashboard extends React.Component {
         <br></br>
         <div className="container movies-container">
           <div className="jumbotron">
-            <div className="h5"><p style={{color:'black', fontSize: 32, fontFamily:'Georgia'}}>Top Listings</p></div>
-
+            <div className="h5"><p style={{color:'black', fontSize: 32, fontFamily:'Georgia'}}>Select A City</p></div>
+            <div className="row">
+            <div className="column"><img src="http://res.cloudinary.com/simpleview/image/upload/v1556138353/clients/austin-redesign/Austin_Convention_Visitors_Bureau_geoffduncan_02_exp_May_2020_86333b4b-0b53-4f58-a79b-b33a6d6cdbe3.jpg" width="330" height="260" alt="Austin"/></div>
+            <div className="column"><img src="https://media.istockphoto.com/photos/san-francisco-picture-id628092860?k=6&m=628092860&s=612x612&w=0&h=qSbJvbn4KawWRhsk2YsMYqoqshApzYc2Ugt7jE7-cGI=" width="330" height="260" alt="San Francisco"/></div>
+            <div className="column"><img src="http://static.trip101.com/paragraph_media/pictures/002/272/230/large/washington-d-1624419_960_720.jpg?1604046868" alt="Washington D.C." width="330" height="260" /></div>
+            </div>
           </div>
 
           <br></br>
