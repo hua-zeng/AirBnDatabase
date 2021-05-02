@@ -90,7 +90,7 @@ export default class Listings extends React.Component {
 										<div className="header"><strong>Amenities</strong></div>
 			    			</div>
 			    		</div>
-			    		<div className="results-container" id="results">
+			    		<div className="results-container" id="reviewResults">
 			    			{this.state.listingsKey}
 			    		</div>
 			    	</div>

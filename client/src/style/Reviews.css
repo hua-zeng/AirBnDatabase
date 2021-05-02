@@ -16,7 +16,7 @@
   flex: 1 0 25%;
 }
 
-.city, .name, .comment, .reviewer, .date{
+.name {
   flex: 1 0 25%;
   flex-flow: column wrap;
   overflow: hidden;
@@ -24,4 +24,28 @@
   white-space: wrap;
 }
 
+.comment {
+  flex: 1 0 25%;
+  flex-flow: column wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: wrap;
+}
+
+.city {
+  padding-left: 10px;
+ }
+ 
+ .reviewer {
+   
+  padding-right: 100px ;
+  
+ }
+ 
+.date {
+  max-width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+ }
 
