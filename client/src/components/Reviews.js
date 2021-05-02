@@ -75,7 +75,7 @@ export default class Reviews extends React.Component {
 										<div className="header"><strong>Date</strong></div>
 			    			</div>
 			    		</div>
-			    		<div className="results-container" id="results">
+			    		<div className="reviews-container" id="results">
 			    			{this.state.recReviews}
 			    		</div>
 			    	</div>
