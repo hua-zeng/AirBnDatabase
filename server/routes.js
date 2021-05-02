@@ -218,7 +218,7 @@ function getCovidCancellations(req, res) {
 
 function getHostInfo(req, res) {
   var query = `SELECT distinct r.host_id, hs.name as host_name,
-  r.num_cities, r.num_listings, hs.superhost_status, hs.about, hs.url, hs.host_since, hs.picture
+  r.num_cities, r.num_listings, hs.about, hs.url, hs.host_since, hs.picture
   FROM 
   (SELECT host_id,
   COUNT(distinct city_name) as num_cities,
