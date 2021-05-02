@@ -217,25 +217,32 @@ function getCovidCancellations(req, res) {
 
 
 function getHostInfo(req, res) {
-  var query = `SELECT distinct r.host_id, hs.name as host_name,
-  r.num_cities, r.num_listings, hs.superhost_status, hs.about, hs.url, hs.host_since, hs.picture
-  FROM 
-  (SELECT host_id,
-  COUNT(distinct city_name) as num_cities,
-  COUNT(distinct listing_id) as num_listings
-  FROM
-  ((SELECT ls.host_id, h.name, ls.id
-  FROM
-  airbnb.host h JOIN airbnb.listing ls
-  ON h.id = ls.host_id) c
-  JOIN airbnb.location lt
-  ON c.id = lt.listing_id)
-  GROUP BY host_id
-  HAVING COUNT(distinct city_name)>1) r
-  JOIN
-  airbnb.host hs
-  ON r.host_id = hs.id WHERE hs.about IS NOT NULL
-  ORDER BY num_listings DESC LIMIT 15`;
+  var query = `
+    WITH 
+    C1 AS 
+    (SELECT ls.host_id, ls.id
+    FROM
+    airbnb.host h JOIN airbnb.listing ls
+    ON h.id = ls.host_id), 
+    C2 AS
+    (SELECT id, host_id, city_name
+    FROM C1 JOIN airbnb.location lt
+    ON id = lt.listing_id),
+    C3 AS 
+    (SELECT host_id,
+    COUNT(distinct city_name) as num_cities,
+    COUNT(distinct id) as num_listings 
+    FROM C2 
+    GROUP BY host_id
+    HAVING COUNT(distinct city_name)>1)
+    SELECT distinct r.host_id, hs.name as host_name,
+    r.num_cities, r.num_listings, hs.about, hs.url, hs.picture
+    FROM C3 r
+    JOIN
+    (SELECT id, name, about, url, picture FROM airbnb.host WHERE about IS NOT NULL) hs
+    ON r.host_id = hs.id
+    ORDER BY num_listings DESC LIMIT 15;
+  `;
   connection.query(query, function(err, rows, fields) {
     if (err) console.log(err);
     else {
