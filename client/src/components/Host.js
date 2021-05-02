@@ -50,7 +50,6 @@ export default class Host extends React.Component {
 			      <div className="jumbotron">
 			        <div className="h5">Top Hosts With Most Listings</div>
 					<div> Identify top hosts who have listings in multiple cities. Click on the image to go to their page!
-			        
 			      </div>
 			      <div className="jumbotron">
 			        <div className="movies-container">
