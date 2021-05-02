@@ -1,29 +1,53 @@
-.header-container, .results-container {
-  display: flex;
-  flex-flow: column wrap;
-  /* margin-top: 10px; */
-  margin: 25px;
-}
-
-.header-container .headers, .results-container .movieResults {
+.header-container  .results-container .movieResults {
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
   height: 40px;
+  width: 100%
 }
 
-.movieResults .title, .movieResults .id, .movieResults .rating, .movieResults .votes, .headers .header {
-  flex: 1 0 25%;
+.headers{
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  height: 40px;
+  width: 996px;
+
 }
 
-.listing {
+.zipcode-header {
+width: 100px;
+
+}
+
+
+.listings {
   column-count: 4;
   font-size: 12px;
-  white-space: nowrap;
   padding-bottom: 1px;
+  width: 100%;
 }
 
+
 .listing_name {
+  max-width: 1000px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-right: 100px ;
+}
+
+.zipcode {
+ padding-left: 10px;
+}
+
+.neighborhood {
+  
+  padding-right: 100px ;
+ 
+}
+
+.amenities {
   max-width: 250px;
   overflow: hidden;
   text-overflow: ellipsis;

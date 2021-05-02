@@ -19,6 +19,8 @@ app.get('/cities/:city', routes.getTopInCity);
 
 app.get('/listings', routes.getAllListings);
 
+app.get('/listings/:writtenZipcode/:writtenAmenities', routes.getAllListingsByZipcodeAndAmenities);
+
 app.get('/location', routes.getAllLocations);
 
 app.get('/location/:selectedCity/:selectedMonth', routes.getAllLocationsSpecifiedByCityAndMonth);
@@ -26,6 +28,7 @@ app.get('/location/:selectedCity/:selectedMonth', routes.getAllLocationsSpecifie
 app.get('/reviews/:reviewKey', routes.getRecs);
 
 app.get('/covid/:selectedCity', routes.getCovidCancellations);
+
 
 
 app.listen(8081, () => {

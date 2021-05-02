@@ -9,7 +9,7 @@ export default class ListingsRow extends React.Component {
 
 	render() {
 		return (
-			<div className="listingsResults">
+			<div className="listings">
                 <div className="zipcode">{this.props.zipcode}</div>
 				<a href={this.props.url} target="_blank">
 				<div className="listing_name">{this.props.name}</div>

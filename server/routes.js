@@ -86,6 +86,26 @@ function getAllListings(req, res) {
   })
 };
 
+function getAllListingsByZipcodeAndAmenities(req, res) {
+  console.log(req.params.writtenZipcode);
+  var query = `
+    Select c.url, c.name, c.zipcode, c.name, c.neighborhood, c.city_name, c.listing_id, c.amenities 
+    FROM 
+    (SELECT * FROM
+	  airbnb.location lc
+      JOIN
+      airbnb.listing ls
+      ON lc.listing_id = ls.id
+      WHERE lc.zipcode = '${req.params.writtenZipcode}' and lc.neighborhood IS NOT NULL  and UPPER(ls.amenities) 
+      LIKE UPPER('%${req.params.writtenAmenities}%')) c LIMIT 30`;
+  
+    connection.query(query, function(err, rows, fields) {
+      if (err) console.log(err);
+      else {
+        res.json(rows);
+      }
+  });
+};
 
 function getAllLocations(req, res) {
   var query = `
@@ -200,6 +220,7 @@ module.exports = {
   getAllCities: getAllCities,
   getTopInCity: getTopInCity,
 	getAllListings: getAllListings,
+  getAllListingsByZipcodeAndAmenities:getAllListingsByZipcodeAndAmenities,
   getAllLocations: getAllLocations,
   getAllLocationsSpecifiedByCityAndMonth: getAllLocationsSpecifiedByCityAndMonth,
   getRecs: getRecs,

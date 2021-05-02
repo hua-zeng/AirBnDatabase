@@ -4,14 +4,16 @@ import ListingsRow from './ListingsRow';
 import '../style/Listings.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-export default class Reviews extends React.Component {
+// Use Homework 2 to figure out how to create the drop-down, create pseudo coding
+
+export default class Listings extends React.Component {
 	constructor(props) {
 		super(props);
 
 		// should not prepopulate but am doing so to test
 		this.state = { 
-			writtenAmenities: "TV",
-			writtenZipcode: 94117, // should this be string or int?
+			writtenAmenities: "",
+			writtenZipcode: "", // should this be string or int?
 			listingsKey: []
 		}
 		this.handleWrittenAmenitiesChange = this.handleWrittenAmenitiesChange.bind(this);
