@@ -70,8 +70,8 @@ export default class Location extends React.Component {
 
 				<div className="container location-container">
 			      <div className="jumbotron">
-			        <div className="h5"><strong>LOCATION</strong></div>
-					<div>  Available listings information, including name, neighborhood, price, and rating for a given city and month based on users’ inputs, e.g. Austin, March (month = 3).
+			        <div className="h5"><strong>Location</strong></div>
+					<div>Available listings information, including name, neighborhood, price, and rating for a given city and month based on users’ inputs, e.g. Austin, March (month = 3).
 
 			        <div className="zip-container">
 			          <div className="input-container">

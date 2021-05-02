@@ -23,7 +23,6 @@ function getAllCities(req, res) {
 };
 
 function getTopInCity(req, res) {
-  var inputCity = req.params.city;
   var query = `SELECT t.listing_id, MAX(t.listing_name) AS listing_name,
   lc.city_name, lc.neighborhood,
   t.avg_review_scores_rating
@@ -59,7 +58,7 @@ function getTopInCity(req, res) {
   ON c.listing_id = l.id) t
   JOIN airbnb.location lc
   ON t.listing_id = lc.listing_id
-  WHERE UPPER(city_name) = UPPER('${inputCity}') AND neighborhood IS NOT NULL
+  WHERE UPPER(city_name) = UPPER('${req.params.city}') AND neighborhood IS NOT NULL
   GROUP BY
   t.listing_id,
   lc.city_name, lc.neighborhood

@@ -35,8 +35,13 @@
 }
 
 /* goes with text on bottom box on the right*/
-.movies-header .header, .movie .rating, .movie .votes {
+.header, .movie .rating, .movie .votes {
   flex: 1 0 25%;
+}
+
+.listings-header {
+  padding-left: 25px;
+  flex:1 0 25%;
 }
 
 .row {
@@ -87,4 +92,19 @@
   color: black;
   font-size: 33px;
   font-weight: bold;
+}
+
+
+.single_listing_name {
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.listing {
+  column-count: 3;
+  font-size: 12px;
+  white-space: nowrap;
+  padding-bottom: 1px;
 }
