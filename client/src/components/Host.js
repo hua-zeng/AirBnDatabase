@@ -3,76 +3,41 @@ import PageNavbar from './PageNavbar';
 import BestGenreRow from './BestGenreRow';
 import '../style/Host.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import HostCard from './HostCard';
 
 export default class Host extends React.Component {
 	constructor(props) {
 		super(props);
-
-		this.state = {
-			selectedDecade: "",
-			decades: [],
-			genres: []
-		};
-
-		this.submitDecade = this.submitDecade.bind(this);
-		this.handleChange = this.handleChange.bind(this);
+		this.state = { 
+			hosts: []
+		  }
 	}
 
 
 	componentDidMount() {
-		fetch("http://localhost:8081/decades",
+		fetch("http://localhost:8081/host",
 		{
 		  method: 'GET' 
 		}).then(res => {
 		  return res.json();
 		}, err => {
 		  console.log(err);
-		}).then(decList => {
-		  if (!decList) return;
-
-		  let allDecades = decList.map((decObj, i) =>
-		  <option value={decObj.decade}>{decObj.decade}</option>
-		  );
-	
-		  this.setState({
-			decades: allDecades
-		  });
-		}, err => {
-		  console.log(err);
-		});
-	}
-
-	handleChange(e) {
-		this.setState({
-			selectedDecade: e.target.value
-		});
-	}
-
-
-	submitDecade() {
-		fetch("http://localhost:8081/host/",
-		{
-		  method: 'GET'
-		}).then(res => {
-		  return res.json();
-		}, err => {
-		  console.log(err);
-		}).then(moviesList => {
-		  if (!moviesList) return;
-		  let movie = moviesList.map((moviesObj, i) =>
-	
-		  <BestGenreRow genre={moviesObj.genre} rating={moviesObj.avg_rating} />
-		  );
+		}).then(hostList => {
+		  if (!hostList) return;
+		  let host = hostList.map((hostObj, i) =>
 		  
+		  <HostCard key={i} host_name={hostObj.host_name} about={hostObj.about} picture={hostObj.picture}
+		   url={hostObj.url} num_cities={hostObj.num_cities} num_listings={hostObj.num_listings}/>
+		  );
 	
 		  this.setState({
-			  genres: movie
+			hosts: host
 		  });
 		}, err => {
-		  // Print the error if there is one.
 		  console.log(err);
-		});	
+		});
 	}
+
 
 	render() {
 
@@ -83,26 +48,17 @@ export default class Host extends React.Component {
 
 				<div className="container host-container">
 			      <div className="jumbotron">
-			        <div className="h5">HOST</div>
-					<div> To see information about AirBnB Hosts and their listed properties, please select a target zipcode.
-			        <div className="years-container">
-			          <div className="dropdown-container">
-			            <select value={this.state.selectedDecade} onChange={this.handleChange} className="dropdown" id="decadesDropdown">
-			            	<option select value> -- select a zipcode -- </option>
-			            	{this.state.decades}
-			            </select>
-			            <button className="submit-btn" id="decadesSubmitBtn" onClick={this.submitDecade}>Submit</button>
-			          </div>
-			        </div>
+			        <div className="h5">Top Hosts With Most Listings</div>
+					<div> Identify top hosts who have listings in multiple cities. Click on the image to go to their page!
+			        
 			      </div>
 			      <div className="jumbotron">
 			        <div className="movies-container">
 			          <div className="movie">
-			            <div className="header"><strong>Host info</strong></div>
-			            <div className="header"><strong>Listings</strong></div>
+			            <div className="header"><strong>Host Information</strong></div>
 			          </div>
 			          <div className="movies-container" id="results">
-			            {this.state.genres}
+			            {this.state.hosts}
 			          </div>
 			        </div>
 			      </div>

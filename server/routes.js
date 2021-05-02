@@ -87,7 +87,6 @@ function getAllListings(req, res) {
 };
 
 function getAllListingsByZipcodeAndAmenities(req, res) {
-  console.log(req.params.writtenZipcode);
   var query = `
     Select c.url, c.name, c.zipcode, c.name, c.neighborhood, c.city_name, c.listing_id, c.amenities 
     FROM 
@@ -215,6 +214,35 @@ function getCovidCancellations(req, res) {
 };
 
 
+function getHostInfo(req, res) {
+  var query = `SELECT distinct r.host_id, hs.name as host_name,
+  r.num_cities, r.num_listings, hs.superhost_status, hs.about, hs.url, hs.host_since, hs.picture
+  FROM 
+  (SELECT host_id,
+  COUNT(distinct city_name) as num_cities,
+  COUNT(distinct listing_id) as num_listings
+  FROM
+  ((SELECT ls.host_id, h.name, ls.id
+  FROM
+  airbnb.host h JOIN airbnb.listing ls
+  ON h.id = ls.host_id) c
+  JOIN airbnb.location lt
+  ON c.id = lt.listing_id)
+  GROUP BY host_id
+  HAVING COUNT(distinct city_name)>1) r
+  JOIN
+  airbnb.host hs
+  ON r.host_id = hs.id WHERE hs.about IS NOT NULL
+  ORDER BY num_listings DESC LIMIT 15`;
+  connection.query(query, function(err, rows, fields) {
+    if (err) console.log(err);
+    else {
+      res.json(rows);
+    }
+  });
+};
+
+
 // The exported functions, which can be accessed in index.js.
 module.exports = {
   getAllCities: getAllCities,
@@ -224,5 +252,6 @@ module.exports = {
   getAllLocations: getAllLocations,
   getAllLocationsSpecifiedByCityAndMonth: getAllLocationsSpecifiedByCityAndMonth,
   getRecs: getRecs,
-  getCovidCancellations: getCovidCancellations
+  getCovidCancellations: getCovidCancellations,
+  getHostInfo: getHostInfo
 }

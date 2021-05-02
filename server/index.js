@@ -17,6 +17,8 @@ app.get('/cities', routes.getAllCities);
 
 app.get('/cities/:city', routes.getTopInCity);
 
+app.get('/host', routes.getHostInfo);
+
 app.get('/listings', routes.getAllListings);
 
 app.get('/listings/:writtenZipcode/:writtenAmenities', routes.getAllListingsByZipcodeAndAmenities);
