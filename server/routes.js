@@ -88,7 +88,7 @@ function getAllListings(req, res) {
 
 function getAllListingsByZipcodeAndAmenities(req, res) {
   var query = `
-    Select c.url, c.name, c.zipcode, c.name, c.neighborhood, c.city_name, c.listing_id, c.amenities 
+    SELECT c.name, c.zipcode, c.name, c.neighborhood, c.city_name, c.listing_id, MAX(c.amenities) AS amenities, MIN(c.url) as url
     FROM 
     (SELECT * FROM
 	  airbnb.location lc
@@ -96,7 +96,9 @@ function getAllListingsByZipcodeAndAmenities(req, res) {
       airbnb.listing ls
       ON lc.listing_id = ls.id
       WHERE lc.zipcode = '${req.params.writtenZipcode}' and lc.neighborhood IS NOT NULL  and UPPER(ls.amenities) 
-      LIKE UPPER('%${req.params.writtenAmenities}%')) c LIMIT 30`;
+      LIKE UPPER('%${req.params.writtenAmenities}%')) c 
+      GROUP BY c.name, c.zipcode, c.name, c.neighborhood, c.city_name, c.listing_id
+      LIMIT 30`;
   
     connection.query(query, function(err, rows, fields) {
       if (err) console.log(err);
