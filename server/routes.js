@@ -217,7 +217,6 @@ function getCovidCancellations(req, res) {
 
 
 function getHostInfo(req, res) {
-<<<<<<< HEAD
   var query = `
     WITH 
     C1 AS 
@@ -244,27 +243,6 @@ function getHostInfo(req, res) {
     ON r.host_id = hs.id
     ORDER BY num_listings DESC LIMIT 15;
   `;
-=======
-  var query = `SELECT distinct r.host_id, hs.name as host_name,
-  r.num_cities, r.num_listings, hs.about, hs.url, hs.host_since, hs.picture
-  FROM 
-  (SELECT host_id,
-  COUNT(distinct city_name) as num_cities,
-  COUNT(distinct listing_id) as num_listings
-  FROM
-  ((SELECT ls.host_id, h.name, ls.id
-  FROM
-  airbnb.host h JOIN airbnb.listing ls
-  ON h.id = ls.host_id) c
-  JOIN airbnb.location lt
-  ON c.id = lt.listing_id)
-  GROUP BY host_id
-  HAVING COUNT(distinct city_name)>1) r
-  JOIN
-  airbnb.host hs
-  ON r.host_id = hs.id WHERE hs.about IS NOT NULL
-  ORDER BY num_listings DESC LIMIT 15`;
->>>>>>> 3bc0f44c58d4a561a6bb287aff95414582e12885
   connection.query(query, function(err, rows, fields) {
     if (err) console.log(err);
     else {
