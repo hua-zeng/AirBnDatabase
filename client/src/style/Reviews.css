@@ -5,9 +5,9 @@
   margin: 25px;
 }
 
-.header-container .headers, .results-container .movieResults {
+.header-container .headers, .reviews-container .movieResults {
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: column wrap;
   align-items: center;
   height: 40px;
 }
@@ -15,3 +15,13 @@
 .movieResults .title, .movieResults .id, .movieResults .rating, .movieResults .votes, .headers .header {
   flex: 1 0 25%;
 }
+
+.city, .name, .comment, .reviewer, .date{
+  flex: 1 0 25%;
+  flex-flow: column wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: wrap;
+}
+
+

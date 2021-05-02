@@ -25,7 +25,6 @@ export default class Reviews extends React.Component {
 		
 	}
 
-
 	submitReviewKey() {
 		fetch("http://localhost:8081/reviews/" + this.state.reviewKey,
     {
@@ -38,7 +37,7 @@ export default class Reviews extends React.Component {
       if (!reviewList) return;
       let reviewDivs = reviewList.map((review, i) =>
 			
-      <ReviewsRow city={review.city_name} name={review.name} comment={review.comments} reviewer={review.reviewer_name} date={review.date} />
+      <ReviewsRow key={i} city={review.city_name} name={review.name} comment={review.comments} reviewer={review.reviewer_name} date={review.date} />
 
       );
       
@@ -61,10 +60,10 @@ export default class Reviews extends React.Component {
 			    <div className="container reviews-container">
 			    	<div className="jumbotron">
 			    		<div className="h5">REVIEWS</div>
-						<p>Reviews of listings.</p>
+						<p>Return listings information based on keywords searching in reviews.</p>
 			    		<br></br>
 			    		<div className="input-container">
-			    			<input type='text' placeholder="write something" value={this.state.reviewKey} onChange={this.handleReviewKeyChange} id="reviewKey" className="review-input"/>
+			    			<input type='text' placeholder="keywords to search" value={this.state.reviewKey} onChange={this.handleReviewKeyChange} id="reviewKey" className="review-input"/>
 			    			<button id="submitReviewKeyBtn" className="submit-btn" onClick={this.submitReviewKey}>Submit</button>
 			    		</div>
 			    		<div className="header-container">
